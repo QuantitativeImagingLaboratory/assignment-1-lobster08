@@ -82,5 +82,7 @@ class resample:
                 originCol = col * colScale
                 newImg[row, col] = calculate_interpolation(image, originCol, originRow)
 
+        #Save new scaled image
+        cv2.imwrite('output\scaled_image.png', newImg)
         return newImg
 
