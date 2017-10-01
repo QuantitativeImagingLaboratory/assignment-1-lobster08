@@ -10,6 +10,12 @@ class binary_image:
 
         hist = [0]*256
 
+        for i in range(image.shape[0]):
+            for j in range(image.shape[1]):
+                intensity = 0
+                for x in range(len(image[i][j])):
+                    intensity += image[i][j][x]
+                hist[int(intensity / 3)] += 1
 
         return hist
 
