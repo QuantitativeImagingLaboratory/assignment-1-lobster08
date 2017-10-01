@@ -27,8 +27,29 @@ class resample:
         """
 
         #Write your code for nearest neighbor interpolation here
+        codes = list(map(int, [image.shape[0] * fy, image.shape[1] * fx, image.shape[2]]))
+        newImg = np.empty(codes, np.uint8)
 
-        return image
+        # Get width and height ratio between old and new images
+        originRow = image.shape[0]
+        originCol = image.shape[1]
+        newRow = newImg.shape[0]
+        newCol = newImg.shape[1]
+
+        rowScale = newRow / originRow
+        colScale = newCol / originCol
+
+        for col in range(newCol - 1):
+            for row in range(newRow - 1):
+                x = col / colScale
+                y = row / rowScale
+                x = round(x)
+                y = round(y)
+                newImg[row, col] = image[y, x]
+
+        # Save image
+        cv2.imwrite('pic\scaledImage_nearestNeighbor.png', newImg)
+        return newImg
 
 
     #Calculate interpolation
@@ -83,6 +104,6 @@ class resample:
                 newImg[row, col] = calculate_interpolation(image, originCol, originRow)
 
         #Save new scaled image
-        cv2.imwrite('output\scaled_image.png', newImg)
+        cv2.imwrite('output\scaled_image_bilinear.png', newImg)
         return newImg
 
