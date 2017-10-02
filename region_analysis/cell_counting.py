@@ -162,7 +162,6 @@ class cell_counting:
                         newImg[row, col] = 255
 
         # Write text on image
-
         for key, value in stats.items():
 
             reg, area, loc = value
@@ -174,9 +173,6 @@ class cell_counting:
             cv2.putText(newImg, "%s" %(text), (row+1, col+1), cv2.FONT_ITALIC, 0.2, color=(0, 0, 0))
 
 
-
-        # cv2.putText(newImg, "*", (5,5), cv2.FONT_ITALIC, 0.35, color=(0, 0, 255))
-        # print(stats)
         cv2.imwrite('output\marked_binary_image.png', newImg)
 
         return newImg
