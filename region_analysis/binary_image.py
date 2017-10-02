@@ -14,7 +14,11 @@ class binary_image:
             for j in range(image.shape[1]):
                 intensity = 0
                 for x in range(len(image[i][j])):
+
+                    #Get intensity of pixel
                     intensity += image[i][j][x]
+
+                #Add intensity into histogram
                 hist[int(intensity / 3)] += 1
 
         return hist
@@ -48,26 +52,30 @@ class binary_image:
             sumT += i * hist[i]
 
         for i in range(size):
-            wB += hist[i]
 
+            #Get weight of background
+            wB += hist[i]
             if (wB == 0):
                 continue
 
+            #Get weight of frontground
             wF = totalPixel - wB
-
             if wF == 0:
                 break
 
             sumB += i * hist[i]
-
             sumF = sumT - sumB
-            print(wB)
 
+            #Get mean of background
             uB = sumB / wB
+
+            #Get mean of frontground
             uF = (sumF) / wF
 
+            #Calculate between variance
             varBetween = float(wB) * float(wF) * (uB - uF) * (uB - uF)
 
+            #Check if new maximum found
             if varBetween > current_max:
                 current_max = varBetween
                 threshold = i
