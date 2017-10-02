@@ -1,4 +1,6 @@
 import numpy as np
+import cv2
+import matplotlib.pyplot as plt
 
 class binary_image:
 
@@ -20,7 +22,8 @@ class binary_image:
 
                 #Add intensity into histogram
                 hist[int(intensity / 3)] += 1
-
+        #Save histogram plot in output folder
+        plt.savefig('output\Binarized_image.png')
         return hist
 
     def find_optimal_threshold(self, hist):
@@ -108,6 +111,8 @@ class binary_image:
                 if (adjusted < threshold):
                     bin_img[row, col] = 0
 
+        #Save binarized image in output folder
+        cv2.imwrite('output\Binarized_image.png', bin_img)
         return bin_img
 
 
