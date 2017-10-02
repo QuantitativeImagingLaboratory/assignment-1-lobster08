@@ -90,6 +90,24 @@ class binary_image:
 
         bin_img = image.copy()
 
+        # Get histogram of the image
+        hist = self.compute_histogram(image)
+
+        # Find the optimal threshold of the image
+        threshold = self.find_optimal_threshold(hist)
+
+        for row in range(bin_img.shape[0]):
+            for col in range(bin_img.shape[1]):
+
+                # Get average value of pixel (Red, Green, and Blue)
+                adjusted = np.average(bin_img[row, col])
+
+                # Compare the average value with threshold to assign black or white
+                if (adjusted > threshold):
+                    bin_img[row, col] = 255
+                if (adjusted < threshold):
+                    bin_img[row, col] = 0
+
         return bin_img
 
 
