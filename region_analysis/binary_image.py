@@ -107,9 +107,9 @@ class binary_image:
 
                 # Compare the average value with threshold to assign black or white
                 if (adjusted > threshold):
-                    bin_img[row, col] = 255
-                if (adjusted < threshold):
                     bin_img[row, col] = 0
+                if (adjusted < threshold):
+                    bin_img[row, col] = 255
 
         #Save binarized image in output folder
         cv2.imwrite('output\Binarized_image.png', bin_img)
