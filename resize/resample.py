@@ -53,7 +53,7 @@ class resample:
 
 
     #Calculate interpolation
-    def calculate_interpolation(img, positionX, positionY):
+    def calculate_interpolation(self, img, positionX, positionY):
         outImg = []
 
         # Get integer and fractional parts of numbers
@@ -101,7 +101,7 @@ class resample:
             for col in range(newImg.shape[1]):
                 originRow = row * rowScale  # Find position in original image
                 originCol = col * colScale
-                newImg[row, col] = calculate_interpolation(image, originCol, originRow)
+                newImg[row, col] = self.calculate_interpolation(image, originCol, originRow)
 
         #Save new scaled image
         cv2.imwrite('output\scaled_image_bilinear.png', newImg)
