@@ -25,8 +25,52 @@ class binary_image:
         hist: a bimodal histogram
         returns: an optimal threshold value"""
 
-        threshold = 0
+        # Get size of histogram
+        size = len(hist)
 
+        # Get total pixel
+        totalPixel = 0
+        for i in range(size):
+            totalPixel += hist[i]
+
+        current_max = 0
+        threshold = 0
+        sumT = 0
+        sumF = 0
+        sumB = 0
+        wB = 0
+        wF = 0
+        varBetween = 0
+        uB = 0
+        uF = 0
+
+        for i in range(size):
+            sumT += i * hist[i]
+
+        for i in range(size):
+            wB += hist[i]
+
+            if (wB == 0):
+                continue
+
+            wF = totalPixel - wB
+
+            if wF == 0:
+                break
+
+            sumB += i * hist[i]
+
+            sumF = sumT - sumB
+            print(wB)
+
+            uB = sumB / wB
+            uF = (sumF) / wF
+
+            varBetween = float(wB) * float(wF) * (uB - uF) * (uB - uF)
+
+            if varBetween > current_max:
+                current_max = varBetween
+                threshold = i
 
         return threshold
 
