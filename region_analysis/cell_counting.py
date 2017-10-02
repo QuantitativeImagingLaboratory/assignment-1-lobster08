@@ -60,14 +60,63 @@ class cell_counting:
         takes as input
         region: a list of pixels in a region
         returns: area"""
-
-
-
         # Please print your region statistics to stdout
         # <region number>: <location or center>, <area>
         # print(stats)
+        # Create a stats dictionary to store statistics
+        stats = dict()
 
-        return 0
+        locationList = dict()
+        key = 1
+
+        # Get maximum label value in region dictionary
+        row, col = max(region, key=region.get)
+        maximum = region[row, col]
+        # print(maximum)
+
+        # Declare empty array for area from index 0 - 360
+        # Maximum value in region is 361
+        area = [0] * maximum
+
+        for i in range(maximum):
+            totalX = []
+            totalY = []
+
+            for k, v in region.items():
+                if (v == key):
+                    # Calculate the location using np.average
+                    x, y = k
+                    totalX.append(x)
+                    totalY.append(y)
+
+                    # Calculate total area for each key value from 1 to 361
+                    area[key - 1] += 1
+
+            # Calculate the centroid using average
+            avgX = np.average(totalX)
+            avgY = np.average(totalY)
+
+            # Empty the list of x and y locations
+            del totalY[:]
+            del totalX[:]
+
+            # Add the centroid location into a list
+            locationList[key - 1] = (avgX, avgY)
+
+            # Update key
+            key += 1
+
+        # Store all information into stats dictionary
+        for i in range(maximum):
+            stats[i] = ((i + 1), area[i], locationList[i])
+
+        # Extract information for display
+        for i in range(maximum):
+            reg, area, loc = stats[i]
+            print("Region: %s, Area: %s, Centroid: %s" % (reg, area, loc))
+
+
+        return stats
 
     def mark_regions_image(self, image, stats):
         """Creates a new image with computed stats
