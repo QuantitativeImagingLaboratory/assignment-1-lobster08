@@ -66,6 +66,8 @@ class cell_counting:
         # Create a stats dictionary to store statistics
         stats = dict()
 
+        tempStats = dict()
+
         locationList = dict()
         key = 1
 
@@ -106,15 +108,23 @@ class cell_counting:
             # Update key
             key += 1
 
-        # Store all information into stats dictionary
+        # Store all information into tempStats dictionary
         for i in range(maximum):
-            stats[i] = ((i + 1), area[i], locationList[i])
+            tempStats[i] = ((i + 1), area[i], locationList[i])
+
+        # Check and delete item that has area value less than 15
+        x = 0
+        for key, value in tempStats.items():
+            reg, area, loc = value
+
+            if (area >= 15):
+                stats[x] = value
+                x += 1
 
         # Extract information for display
-        for i in range(maximum):
+        for i in range(len(stats)):
             reg, area, loc = stats[i]
             print("Region: %s, Area: %s, Centroid: %s" % (reg, area, loc))
-
 
         return stats
 
