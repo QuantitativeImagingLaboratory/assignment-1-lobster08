@@ -35,6 +35,33 @@ Finally, save the pixel values into a temporary list, and return it back to bili
 interpolation.py
 *********************
 
+#############################
+def linear_interpolation():
+
+Assume that pt1, pt2, and unknown are lists. Each contains a coordinate (x,y) and a intensity value
+Assume that intensity of unknown is 0 at the moment, we will update it after computing
+    pt1 = [x,y,intensity]
+    pt2= [x,y,intensity]
+    unknown = [x,y,intensity]
+
+Formula to use to calculate the intensity
+    part1 = [ [(pt2(x) - unknown(x)) / (pt2(x) - pt1(x))] * (pt1(intensity) ]
+    part2 = [ [(unknown(x) - pt1(x)) / (pt2(x) - pt1(x)] * (pt2(intensity)) ]
+    unknown(intensity) = part1 + part2
+    
+#############################
+def bilinear_interpolation():
+
+Assume that pt1, pt2, and unknown are lists. Each contains a coordinate (x,y) and a intensity value
+Assume that intensity of unknown is 0 at the moment, we will update it after computing
+    pt1 = [x,y,intensity]
+    pt2= [x,y,intensity]
+    pt3= [x,y,intensity]
+    pt4= [x,y,intensity]
+    unknown = [x,y,intensity]
+Then, use the linear_interpolation function to compute the intensity of point between pt1 and pt2, pt3 and pt4
+Finally, use the computed intensity values to compute the unknown's intensity value using the linear_interpolation function
+
 
 *************************************************************************
 *************************************************************************
